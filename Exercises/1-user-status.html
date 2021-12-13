@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            user-Status 
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+          
+           function LoggedIn(props){
+              return (
+                  <img src="https://i.ibb.co/cNfHy3b/green-dot.png" alt="green dot"/>
+              )
+          }
+
+        function LoggedOut(props){
+            return <img src="https://i.ibb.co/jhPVt09/red-dot.png" alt="red dot"/>
+        }
+
+
+
+           function UserStatus(props){
+               console.log(props)
+               const {name,isLoggedIn}=props
+            return (
+                   <div>
+                   <h2>{isLoggedIn?<LoggedIn />:<LoggedOut />}{name}</h2> 
+                    </div>
+               )
+           }
+           
+           function App(props){
+            const users=[
+                {id:1,name:'raj',isLoggedIn:false},
+                {id:2,name:'raju',isLoggedIn:true},
+                {id:3,name:'ram',isLoggedIn:true},
+                {id:4,name:'rani',isLoggedIn:false},
+            ]
+            return (
+                <div>
+                    <h1>user status component</h1>
+                    {users.map((user)=>{
+                        return <UserStatus key={user.id} {...user}/>
+                    })}
+                </div>
+            )
+           }
+           ReactDOM.render(<App />,rootHandle)
+            
+           
+        </script>
+    </body>
+</html>

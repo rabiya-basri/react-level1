@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>axios promise all</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+        const rootHandler=document.getElementById('root')
+        const url1='https://jsonplaceholder.typicode.com/users'
+        const url2='https://jsonplaceholder.typicode.com/posts'
+
+        // Promise.all([axios.get(url1),axios.get(url2)])
+        // .then((values)=>{
+        //     const [user,post]=values
+        //     console.log('user',user)
+        //     console.log('posts',post)
+        // })
+
+        Promise.race([axios.get(url1),axios.get(url2)])
+        .then((value)=>{
+            console.log(value)
+        })
+        </script>
+    </body>
+</html>

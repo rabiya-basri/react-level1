@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            select tag
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           
+            const {useState}=React 
+
+            function UserLaptop(props){
+                const [userName,setUserName]=useState('')
+                const [laptop,setLaptop]=useState('')
+                const [isSubmitted,setIsSubmitted]=useState(false)
+                const brands=['Apple','Hp','Samsung']
+
+                const handelUserName=(e)=>{
+                    const inputUserName=e.target.value
+                    setUserName(inputUserName)
+                }
+                const handelLaptop=(e)=>{
+                    const selectLaptop=e.target.value
+                    setLaptop(selectLaptop)
+                }
+                const handelSubmit=(e)=>{
+                    e.preventDefault()
+                    setIsSubmitted(!isSubmitted)
+                }
+                return (
+                    <div>
+                        {isSubmitted && <h1>{laptop}</h1>}
+                        
+                        <form onSubmit={handelSubmit}>
+                        <label>UserName</label><br/>
+                        <input type="text" value={userName} onChange={handelUserName}/><br/>
+                        <label>Laptop</label>
+                        <select value={laptop} onChange={handelLaptop}>
+                            <option value="">select brand</option>
+                            {/*<option value="Hp">Hp</option>
+                            <option value="Apple">Apple</option>
+                            <option value="Acer">Acer</option>
+                            <option value="Samsung">Samsung</option>
+                        */}
+                            {brands.map((brand,i)=>{
+                                return (
+                                    <option value={brand} key={i}>{brand}</option>
+                                )
+                            })}
+                        </select><br/>
+                        <input type="submit" />
+                    </form>
+                    </div>
+                )
+            }
+           ReactDOM.render(<UserLaptop />,rootHandle)
+        </script>
+    </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            how to update state using call back
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           
+           //extract usestate from react library
+           const {useState}=React
+
+            function Counter(props){
+                //declare state variable inside function component
+                const [count,setCount]=useState(0)
+
+                const decrement=()=>{
+                        setCount(count - 1)
+                    }
+                return (
+                    <div>
+                        <h2>{count}</h2>
+                        <button onClick={()=>{
+                            setCount(count + 1)
+                        }}>+1</button>
+
+                        <button onClick={decrement}>-1</button>
+
+                        <button onClick={()=>{
+                            setCount(0)
+                        }}>reset</button>
+                    </div>
+                )
+            }
+            ReactDOM.render(<Counter />,rootHandle)
+           
+        </script>
+    </body>
+</html>

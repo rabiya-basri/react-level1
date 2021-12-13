@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            search box field
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           
+           const {useState}=React 
+           function SearchBox(props){
+               const [search,setSearch]=useState('')
+
+               //callbackfunction
+               const handelSearch=(e)=>{
+                const inputSearch=e.target.value
+                console.log(inputSearch)
+                setSearch(inputSearch)
+               }
+               return (
+                   <input type="text" value={search} onChange={handelSearch}/>
+               )
+           }
+           ReactDOM.render(<SearchBox />,rootHandle)
+           
+        </script>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>react element variable</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+
+        <script type="text/babel">
+        const rootHandler=document.getElementById('root')
+
+        function AuthButton(props){
+            const {isLoggedIn}=props
+            let button
+            if(isLoggedIn){
+                button=<button>logout</button>
+            }else{
+                button=<button>login</button>
+            }
+            return (
+            <div>
+                {button}
+            </div>
+            )
+        }
+        function App(props){
+            const isLoggedIn=false
+            return (
+                <div>
+                    <h1>website button</h1>
+                    <AuthButton  isLoggedIn={isLoggedIn}/>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />,rootHandler)
+        </script>
+    </body>
+</html>

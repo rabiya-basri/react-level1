@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>react attributes</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+
+        <script type="text/babel">
+        const rootHandler=document.getElementById('root')
+
+        const website={
+            title:'facebook',
+            url:'https://facebook.com'
+        }
+        const ele=<a href={website.url} target='_blank'>{website.title}</a>
+
+        ReactDOM.render(ele,rootHandler)
+        </script>
+
+    </body>
+</html>

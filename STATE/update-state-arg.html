@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            update state agruments by passing arguments to function
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           
+            const {useState}=React
+
+            function FriendList(props){
+                const [names,setName]=useState(['raj','ram','raju'])
+
+                function removeItem(name){//pure function
+                   const newNames=[...names]//deep copy of array
+                   const index=newNames.indexOf(name)
+                   newNames.splice(index,1)
+                   setName(newNames)
+
+                }
+                return (
+                <div>
+                    <h1>Listing friend list-{names.length}</h1>
+                    <ul>
+                        {names.map((name,i)=>{
+                            return (
+                                <li key={i}>{name}
+                                    <button onClick={()=>{
+                                        removeItem(name)
+                                    }}>remove</button>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+                )
+            }
+           
+            ReactDOM.render(<FriendList />, rootHandle)
+        </script>
+    </body>
+</html>

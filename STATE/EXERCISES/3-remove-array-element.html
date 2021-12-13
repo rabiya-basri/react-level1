@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            3-remove element into array and disply list
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           /*
+           create a componet call randomnumbers
+           maintain state variable called as number
+           display the count of numbers
+           display a button on the screen called as Add,remove
+           when the user clicks the button,generate the random number and add it to state
+           display new list
+           */
+
+           const {useState}=React
+           function RandomNumbers(props){
+            const [numbers,setNumbers]=useState([])
+
+            //deep copy
+            const generateRandom=()=>{
+                //spread
+                const random=Math.round(Math.random()*100)
+                const newNumber=[...numbers,random]
+                setNumbers(newNumber)
+
+            }
+
+            const removeElement=(index)=>{
+                /*const newArray=[...numbers]
+                newArray.splice(index,1)
+                setNumbers(newArray)*/
+
+                //using filter-proper way
+                const result=numbers.filter((ele,i)=>{
+                    return i!==index
+                })
+                setNumbers(result)
+            }
+               return(
+                   <div>
+                    <h1>Total- {numbers.length}</h1>
+                    <button onClick={generateRandom}>Add</button>
+                    <ul>
+                        {numbers.map((number,i)=>{
+                            return (
+                                <li key={i}>{number}
+                                    <button onClick={()=>{
+                                        removeElement(i)
+                                    }}>remove</button>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                    </div>
+               )
+           }
+            
+           ReactDOM.render(<RandomNumbers />,rootHandle)
+        </script>
+    </body>
+</html>

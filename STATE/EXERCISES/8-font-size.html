@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            increment - decrement font size 
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           
+           const {useState}=React
+          function FontController(props){
+            const [size,setSize]=useState(50)
+            const h1Style={fontSize:size + 'px',display:'inline'}
+
+            const increment=()=>{
+                setSize(size+5)
+            }
+            const decrement=()=>{
+                const result=size-5
+                if(!(result<20)){
+                    setSize(size-5)
+                }else{
+                    alert('size cannot go below 20')
+                }
+            }
+            return (
+                <div>
+                   <button onClick={decrement}>-</button> 
+                   <h1 style={h1Style} >Dct academy</h1>
+                   <button onClick={increment}>+</button>
+                </div>
+            )
+          }  
+          ReactDOM.render(<FontController />,rootHandle)
+           
+        </script>
+    </body>
+</html>

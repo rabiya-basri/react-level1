@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>react object - forin</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+
+        <script type="text/babel">
+        const rootHandler=document.getElementById('root')
+
+        const data={
+            usa:30,
+            india:20,
+            italy:10,
+        }
+
+        //forin
+        // const generateList=(data)=>{
+        //     const result=[]
+        //     for(const k in data){
+        //         result.push(<li key={k}>{k}-{data[k]}</li>)
+        //     }
+        //     return result
+        // }----- {generateList(data)}---call this function inside <ul>
+
+        const ele=(
+            <ul>
+               {Object.keys(data).map((ele)=>{
+                   return <li key={ele}>{ele}-{data[ele]}</li>
+               })}
+             </ul>
+        )
+        ReactDOM.render(ele,rootHandler)
+        </script>
+    </body>
+</html>

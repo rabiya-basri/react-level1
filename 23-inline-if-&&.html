@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>inline if with logical && operator</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+
+        <script type="text/babel">
+        const rootHandler=document.getElementById('root')
+
+        function StudentLink(props){//child
+
+            return (
+            <div>
+                <a href="student/show">show</a>
+                {
+                   props.user.role === 'admin' && <a href="student/delete">delete</a>
+                }       
+            </div>
+            )
+        }
+
+        function App(props){//parent,if user contain admin as role then it will display show,delete link
+            const users={
+                id:1,
+                name:'user1',
+                role:'student'
+            }
+            return (
+                <div>
+                    <h2>Student management</h2>
+                    <StudentLink user={users}/>
+            </div>
+            )
+        }
+        ReactDOM.render(<App />,rootHandler)
+        </script>
+    </body>
+</html>

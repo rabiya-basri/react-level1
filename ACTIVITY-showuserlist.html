@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>react template</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+
+        <script type="text/babel">
+        const rootHandler=document.getElementById('root')
+
+        const user=[
+            {id:1,name:'raj'},
+            {id:2,name:'ram'},
+            {id:3,name:'ramu'}
+        ]
+        const ele=(
+            <div>
+            <h2>Listing user-{user.length}</h2>
+            <ul>
+                {user.map((ele,i)=>{
+                    return <li>{ele.name}</li>
+                })}
+            </ul>
+            </div>
+        )
+
+        ReactDOM.render(ele,rootHandler)
+        </script>
+    </body>
+</html>

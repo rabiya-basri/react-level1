@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>react event arguments</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+
+        <script type="text/babel">
+        const rootHandler=document.getElementById('root')
+
+        const users=[
+            {id:1,name:'facebook',email:'f@gmail.com'},
+            {id:2,name:'instagram',email:'i@gmail.com'},
+            {id:3,name:'twitter',email:'t@gmail.com'}
+        ]
+
+        function UserList(props){
+
+            function showDetails(user){
+                alert(`${user.id} - ${user.name}-${user.email}`)
+            }
+            return (
+                <ul>
+                    {props.users.map((user)=>{
+                        return (
+                            <li key={user.id}>{user.name} <button onClick={
+                                ()=>{showDetails(user)}
+                            }>show</button></li>
+                        )
+                    })}
+                </ul>
+            )
+        }
+
+        const ele=(
+        <UserList users={users}/>
+        )
+        ReactDOM.render(ele,rootHandler)
+        </script>
+    </body>
+</html>

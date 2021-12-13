@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            handel form submission
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           
+           const {useState}=React 
+           function MyName(props){
+            const [name,setName]=useState('')
+
+            const handelnameChange=(e)=>{
+                const inputName=e.target.value
+                setName(inputName)
+            }
+            const handelSubmit=(e)=>{
+                e.preventDefault()
+                alert(`${name} has ${name.length} characters`)
+            }
+            return (
+                <div>
+                    <form onSubmit={handelSubmit}>
+                        <input type="text" value={name} onChange={handelnameChange}/>
+                        <input type="submit" value="cal length"/>
+                    </form>
+                </div>
+            )
+           } 
+           ReactDOM.render(<MyName />,rootHandle)
+        </script>
+    </body>
+</html>

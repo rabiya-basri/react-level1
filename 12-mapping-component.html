@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>mapping component</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+
+        <script type="text/babel">
+        const rootHandler=document.getElementById('root')
+
+        const users =  [
+            { "id": 1, "email": "george@gmail.com", "first_name": "George", "avatar": "https://randomuser.me/api/portraits/men/32.jpg" },
+            { "id": 2, "email": "weaver@gmail.com", "first_name": "Weaver", "avatar": "https://randomuser.me/api/portraits/men/46.jpg" },
+            { "id": 3, "email": "wong@gmail.com", "first_name": "Wong", "avatar": "https://randomuser.me/api/portraits/men/36.jpg" },
+            { "id": 4, "email": "eve@gmail.com", "first_name": "Eve", "avatar": "https://randomuser.me/api/portraits/women/79.jpg" }
+        ] 
+
+        function UserInfo(props){
+            return (
+                <div>
+                    <img src={props.avatar} alt={props.first_name}/>
+                    <h2>{props.first_name}</h2>
+                    <hr/>
+                </div>
+            )
+        }
+
+        const ele=(
+        <div>
+            {users.map((user)=>{
+                return <UserInfo key={user.id} first_name={user.first_name} avatar={user.avatar} />
+            })}
+        </div>
+        )
+
+        ReactDOM.render(ele,rootHandler)
+        </script>
+    </body>
+</html>

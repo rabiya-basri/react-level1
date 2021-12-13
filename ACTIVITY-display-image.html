@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>displaying image</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+
+        <script type="text/babel">
+        const rootHandler=document.getElementById('root')
+
+            const user={
+                firstName:'joseph',
+                email:'josep@gmail.com',
+                avatar:'https://i.picsum.photos/id/1/367/267.jpg?hmac=jZdc5TviQPVhxLyvyU8siO-I5FMVXVZpBhsBYKbBJpM'
+            }
+
+            const ele=<img src={user.avatar} alt={user.firstName}/>
+            
+            ReactDOM.render(ele,rootHandler)
+        </script>
+    </body>
+</html>

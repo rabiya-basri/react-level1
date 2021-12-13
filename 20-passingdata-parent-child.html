@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>passing data from parent to child</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+
+        <script type="text/babel">
+        const rootHandler=document.getElementById('root')
+
+        function Parent(props){
+            const name1='ross'
+            const name2='raj'
+            return (
+            <div>
+            <h1>Parent component</h1> 
+            <Child name={name1}/> 
+            <Child name={name2}/>
+            <Child name='raju'/>  
+            </div>
+            )
+        }
+        function Child(props){
+            console.log(props)
+            return (
+                <div>
+                    <h2>child component - {props.name}</h2>
+                </div>
+            )
+        }
+        ReactDOM.render(<Parent/>,rootHandler)
+        </script>
+    </body>
+</html>

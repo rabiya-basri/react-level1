@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>embed child component using map</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+
+        <script type="text/babel">
+        const rootHandler=document.getElementById('root')
+
+        function Parent(props){
+            const names=['raj','ross','renu','monica']
+            
+            function getHug(name){
+                alert(`${name} hugs parent`)
+            }
+            return (
+            <div>
+            <h1>Parent component</h1> 
+            {names.map((ele,i)=>{
+                return (
+                    <Child key={i} name={ele} func={getHug}/>
+                )
+            })}
+            </div>
+            )
+        }
+        function Child(props){
+            console.log(props)
+            return (
+                <div>
+                    <h2>child component - {props.name}</h2>
+                    <button onClick={()=>{
+                        props.func(props.name)
+                    }}>hug</button>
+                </div>
+            )
+        }
+        ReactDOM.render(<Parent/>,rootHandler)
+        </script>
+    </body>
+</html>

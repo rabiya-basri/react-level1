@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>inline if else with ternary operator</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+
+        <script type="text/babel">
+        const rootHandler=document.getElementById('root')
+
+        function CartSection(props){
+
+            return (
+                <div>
+                    {
+                        props.items.length===0 ? 
+                        ( <p>Your catr is empty</p> ) : 
+                        ( <p>your cart has {props.items.length} item </p>)
+                    } 
+            </div>
+            )
+        }
+        function App(props){
+
+            const items=[{
+                id:1,
+                product:'milk',
+                price:20
+            },{
+                id:2,
+                product:'cheese',
+                price:200
+            }]
+            return (
+                <div>
+                    <h2>Cart</h2>
+                    <CartSection items={items} />
+                </div>
+            )
+        }
+        ReactDOM.render(<App />,rootHandler)
+        </script>
+    </body>
+</html>

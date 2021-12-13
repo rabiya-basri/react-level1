@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            show-hide text 
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           
+           const {useState}=React
+           function TextDisplay(props){
+            const [status,setStatus]=useState(true)
+
+            const toggle=()=>{
+                const result=!status
+                setStatus(result)
+            }
+            return (
+                <div>
+                    {status && <p>hello,this is show text/ hide text example</p> }
+                    <button onClick={toggle}>{status ? 'Hide' : 'Show'}</button>
+                </div>
+            )
+           }
+           ReactDOM.render(<TextDisplay />,rootHandle)
+            
+           
+        </script>
+    </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            axios 
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           const {useState,useEffect}=React 
+           const url='https://restcountries.eu/rest/v2/all?fields=name;capital'
+           function CountriesCount(props){
+               const [countries,setCountries]=useState([])
+
+               useEffect(()=>{
+                axios.get(url)
+                     .then((response)=>{
+                         console.log(response)
+                         console.log(response.data)
+                         const result=response.data
+                         setCountries(result)
+                     })
+
+
+                    // const xhr=new XMLHttpRequest()
+                    // xhr.open('GET',url)
+                    // xhr.send()
+                    // xhr.onload=function (){
+                    //     console.log(JSON.parse(xhr.responseText))
+                    //     const data=JSON.parse(xhr.responseText)
+                    //     setCountries(data)
+                    // }
+               },[])
+
+               return (
+                    <div>
+                        <h1>Listing Countries-{countries.length}</h1>
+                        <ul>
+                            {countries .map((country,i)=>{
+                                return (
+                                    <li key={i}>
+                                        {country.name}-{country.capital}
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+               )
+           } 
+           ReactDOM.render(<CountriesCount />,rootHandle)
+        </script>
+    </body>
+</html>

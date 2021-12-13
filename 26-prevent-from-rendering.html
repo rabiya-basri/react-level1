@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>react prevent render</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+
+        <script type="text/babel">
+        const rootHandler=document.getElementById('root')
+
+        function Payment(props){
+
+            const {isDue}=props
+            if(!isDue){
+                return null
+            }
+            return (
+                <div>
+                    <h2>Payment info</h2>
+                </div>
+            )
+        }
+        function App(props){
+            const isDue=false
+            return (
+                <div>
+                    <h1>collect payment</h1>
+                    <Payment isDue={isDue}/>
+                </div>
+            )
+        }
+        ReactDOM.render(<App />,rootHandler)
+        </script>
+    </body>
+</html>

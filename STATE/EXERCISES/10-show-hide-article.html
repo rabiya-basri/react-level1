@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            show hide articles
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           const {useState}=React
+
+           function TextDisplay(props){
+            const [status,setStatus]=useState(true)
+            const {title,body}=props
+
+            const toggle=()=>{
+                const result=!status
+                setStatus(result)
+            }
+
+            return (
+                <div>
+                    {status && <p>{body} </p>}
+                    <button onClick={toggle}>{status ? 'Hide' : 'Show'}-{title}</button>
+            </div>
+            )
+           }
+           function App(props){
+            
+            const data=[
+                {title:'react article',body:'react make developer to make ui dymnamic'},
+                {title:'javascript article',body:'javascript is amazing'},
+                {title:'html article',body:'html-stands for hyper text markup language'}
+            ]
+            return (
+                <div>
+                    <h1>Listing Rticle</h1>
+                    {data.map((article,i)=>{
+                        return <TextDisplay key={i} {...article}/>
+                    })}
+                </div>
+            )
+           } 
+           ReactDOM.render(<App />,rootHandle)
+        </script>
+    </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            final bill 
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           
+            /*
+            create a component called final bill
+            the component returns a form, with 2 input fields
+            amount-number
+            final amount-disable
+            when the user enters the amount , 
+            calculate and isplay the final amount by calculating 18%gst
+            */
+           
+            const {useState}=React 
+            function FinalBill(props){
+                const [amount,setAmount]=useState(0)
+                const [finalAmount,setFinalAmount]=useState(0)
+
+                const handelChange=(e)=>{
+                    const amt=e.target.value
+                    setAmount(amt)
+                    const finalAmount=Number(amt)+((amt * 18) / 100).toFixed(2)
+                    setFinalAmount(finalAmount)
+                }
+                return (
+                    <div>
+                        <form>
+                        amount<input type="number" value={amount} onChange={handelChange}/><br/>
+                        final amount<input type="number" value={finalAmount}  onChange={handelChange} disabled={true}/>
+                        </form>
+                    </div>
+                )
+            }
+            ReactDOM.render(<FinalBill />,rootHandle)
+        </script>
+    </body>
+</html>

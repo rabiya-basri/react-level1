@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>reuseable-user component</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+
+        <script type="text/babel">
+        const rootHandler=document.getElementById('root')
+
+        const user1={
+                firstName:'joseph',
+                email:'josep@gmail.com',
+                avatar:'https://i.picsum.photos/id/1/367/267.jpg?hmac=jZdc5TviQPVhxLyvyU8siO-I5FMVXVZpBhsBYKbBJpM'
+            }
+        
+            const user2={
+                firstName:'joseph',
+                email:'josep@gmail.com',
+                avatar:'https://i.picsum.photos/id/1/367/267.jpg?hmac=jZdc5TviQPVhxLyvyU8siO-I5FMVXVZpBhsBYKbBJpM'
+            }
+        
+            function UserInfo(prop){
+                return (
+                    <div>
+                        <img src={prop.image} alt={prop.name}/>
+                        <h3>{prop.name}</h3>
+                    </div>
+                )
+            }
+
+            const ele=(
+                <div>
+                <UserInfo name={user1.firstName} image={user1.avatar} />
+                <UserInfo name={user2.firstName} image={user2.avatar} />
+            </div>
+            )
+
+            ReactDOM.render(ele,rootHandler)
+        </script>
+    </body>
+</html>

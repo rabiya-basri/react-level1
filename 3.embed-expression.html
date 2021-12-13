@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>react expression</title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+
+        <script src="JS/react.development.js"></script>
+        <script src="JS/react-dom.development.js"></script>
+        <script src="JS/babel.js"></script>
+
+        <script type="text/babel">
+        const rootHandler=document.getElementById('root')
+        //1-Arthematic expression
+       // const ele=<h1>The sum of 2 + 3 = {2+3}</h1>
+
+        //2-can access object property and can also call string methods like,toUppercase() etc
+        const user={
+            firstName:'raj',
+            lastName:'john'
+        }
+        //const ele=<h1>Hello, {user.firstName.toUpperCase()} </h1>
+
+        //3-can also call functions inside {}
+        const fullName=(user)=>{
+            return `${user.firstName} ${user.lastName}`
+        }
+        const ele=<h1>Hello,{fullName(user)}</h1>
+        ReactDOM.render(ele,rootHandler)
+        </script>
+    </body>
+</html>

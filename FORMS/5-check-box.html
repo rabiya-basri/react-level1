@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            checkbox
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           
+            const {useState}=React 
+            function TableReservation(props){
+                const [userName,setUsername]=useState('')
+                const [isVeg,setVeg]=useState(false)
+
+                const handelUserName=(e)=>{
+                    const inputUser=e.target.value
+                    setUsername(inputUser)
+                }
+
+                const handelSubmit=(e)=>{
+                    e.preventDefault()
+                    alert(`${userName}-veg preference-${isVeg ? 'Yes' : 'no'}`)
+                }
+                const handelIsVeg=(e)=>{
+                    const isVegSelect=e.target.checked
+                    setVeg(isVegSelect)
+                }
+                return (
+                    <div>
+                        <form onSubmit={handelSubmit}>
+                            <label>UserName</label><br/>
+                            <input type="text" value={userName} onChange={handelUserName}/><br/>
+                            isVeg<input type="checkbox" checked={isVeg} onChange={handelIsVeg}/>
+                            <input type="submit"/>
+                        </form>
+                    </div>
+                )
+            }
+           ReactDOM.render(<TableReservation />,rootHandle)
+        </script>
+    </body>
+</html>
