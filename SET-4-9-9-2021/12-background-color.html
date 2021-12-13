@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            display background
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           const {useState,useEffect}=React 
+
+           function BackgroundColor(props){
+               const [bgColor,setBgColor]=useState('')
+               const [selectedColor,setSelectedColor]=useState(null)
+
+               const colorData=['red', 'green', 'yellow', 'black', 'pink', 'orange']
+               useEffect(()=>{
+                document.body.style.backgroundColor = bgColor
+               },[bgColor])
+               
+               const handelColor=(e)=>{
+                setBgColor(e.target.value)
+
+                // const result=colorData.filter((color)=>{
+                //     return color===e.target.value
+                // })
+
+                // console.log(result)
+                // setSelectedColor(document.body.style.backgroundColor = result)
+                // document.body.style.backgroundColor = e.target.value
+               }
+
+               return (
+                   <form>  
+                    <select value={bgColor} onChange={handelColor}>
+                        <option value="">select color</option>
+                        {colorData.map((color,i)=>{
+                            return (
+                                <option value={color} key={i}>{color}</option>
+                            )
+                        })}
+                    </select>
+                    </form>
+               )
+           }
+            
+          ReactDOM.render(<BackgroundColor />,rootHandle) 
+        </script>
+    </body>
+</html>

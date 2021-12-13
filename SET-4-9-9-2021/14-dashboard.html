@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            dashboard
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           const {useState,useEffect}=React 
+           function Dashboard(props){
+               const [users,setUser]=useState([])
+               const [todos,setTodo]=useState([])
+               const [posts,setPosts]=useState([])
+            
+               
+               useEffect(()=>{
+                   axios.get('https://jsonplaceholder.typicode.com/users')
+                        .then((response)=>{
+                            const user=response.data
+                            setUser(user)
+                        })
+               },[])
+               
+               useEffect(()=>{
+                   axios.get('https://jsonplaceholder.typicode.com/todos')
+                        .then((response)=>{
+                            const todo=response.data
+                            setTodo(todo)
+                        })
+               },[])
+               useEffect(()=>{
+                   axios.get('https://jsonplaceholder.typicode.com/posts')
+                        .then((response)=>{
+                            const post=response.data
+                            setPosts(post)
+                        })
+               })
+               return (
+                   <div>
+                    <h1>Dashboard</h1>
+                    <h2>User-{users.length}</h2>
+                    <h2>Todo-{todos.length}</h2>
+                    <h2>posts-{posts.length}</h2>
+                    </div>
+               )
+           } 
+         ReactDOM.render(<Dashboard />,rootHandle)  
+        </script>
+    </body>
+</html>

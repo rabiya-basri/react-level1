@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            display users todo
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           const {useState,useEffect}=React 
+            const url='https://jsonplaceholder.typicode.com/users'
+
+            function App(props){
+                const [users,setUsers]=useState([])
+                const [userTodo,setUserTodo]=useState([])
+                
+                    useEffect(()=>{
+                        axios.get(url)
+                            .then((response)=>{
+                            // console.log(response.data)
+                                const data=response.data
+                                setUsers(data)
+                            })
+                },[])
+                   
+            const userCallBack=(todoId)=>{
+                setUserTodo(todoId)
+            }
+               const handelUserSelect=(users)=>{
+                   setUsers(users)
+               }
+                return (
+                    <div>
+                        <UsersSelect users={users} handelUserSelect={handelUserSelect} userCallBack={userCallBack}/>
+                        <UserTodo userTodo={userTodo} />
+                    </div>
+                )
+            }
+
+
+           function UsersSelect(props){
+            const {users,handelUserSelect,userCallBack}=props
+            const [userDrop,setUserDrop]=useState('')
+           
+            const handeDropDown=(e)=>{
+                const id=e.target.value
+                    axios.get(`https://jsonplaceholder.typicode.com/todos?userId=${id}`)
+                        .then((response)=>{
+                            console.log(response.data)
+                            userCallBack(response.data)
+                        })
+                setUserDrop(id)
+            }
+
+               return (
+                    <div>
+                        <label>users</label>
+                        <select value={userDrop} onChange={handeDropDown}>
+                            <option value="">select Users</option>  
+                            {users.map((user)=>{
+                                return (
+                                    <option value={user.id} key={user.id}>{user.name}</option>
+                                )
+                            })}
+                        </select>
+                    </div>
+               )
+           } 
+
+           function UserTodo(props){
+               const {userTodo}=props 
+
+               if(userTodo){
+                return (
+                    <div> 
+                        
+                        {userTodo.length>0 && <h1>Listing Tasks </h1>}<ul>
+                            {userTodo.map((todo)=>{
+                                return (
+                                    <li key={todo.id}>
+                                    {todo.completed ? <strike>{todo.title}</strike>:<p>{todo.title}</p>}
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                        
+                    </div>
+               )
+               }      
+           }
+          ReactDOM.render(<App />,rootHandle) 
+        </script>
+    </body>
+</html>

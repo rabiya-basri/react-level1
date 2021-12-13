@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Presistant 
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           const {useState,useEffect}=React 
+
+            function Presistant(props){
+                const [title,setTitle]=useState(
+                    localStorage.getItem('Title') || ''
+                )
+                const [storyBody,setStoryBody]=useState(
+                    localStorage.getItem('StoryBody')||''
+                )
+
+                useEffect(()=>{
+                    localStorage.setItem('Title',title) 
+                    localStorage.setItem('StoryBody',storyBody)
+                },[title,storyBody])
+
+                const handelSubmit=(e)=>{
+                    localStorage.clear()
+                }
+                const handelReload=()=>{
+                    window.location.reload()
+                }
+                return (
+                    <form onSubmit={handelSubmit}>
+                        <h1>Story Book</h1>
+                        <label>Title</label><br/>
+                        <input type="text" value={title} onChange={(e)=>setTitle(e.target.value)}/><br/>
+                        <label>body</label><br/>
+                        <textarea value={storyBody} onChange={(e)=>setStoryBody(e.target.value)}></textarea><br/>
+                        <input type="submit" value='save' />
+                        <input type="button" value='reload' onClick={handelReload}/>
+                    </form>
+                )
+            }
+           ReactDOM.render(<Presistant />,rootHandle)
+        </script>
+    </body>
+</html>

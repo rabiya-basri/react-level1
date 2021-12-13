@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            show progress
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           const {useState}=React 
+
+
+           function TaskContainer(props){
+            const allTask=[
+                   {id:1,title:'get the website live',completed:false},
+                   {id:2,title:'work on user validation',completed:false},
+                   {id:3,title:'Automate the deployment process',completed:false}
+               ]
+
+               const [markTasks,setMarkTasks]=useState(allTask)
+               const updateProgress=markTasks.filter((task)=>{
+                return task.completed
+                })
+               const [progressTask,setProgressTask]=useState(updateProgress)
+
+            
+               const handelCheck=(e,id)=>{
+               const checkTask=e.target.checked
+                const result=markTasks.map((task)=>{
+                    if(task.id===id){
+                        task.completed=checkTask
+                        return task
+                    }else{
+                        return task
+                    }
+                })
+               setMarkTasks(result)
+              
+               const newUpdatePrgress=result.filter((task)=>{
+                   return task.completed
+               })
+               setProgressTask(newUpdatePrgress)
+              }
+
+               return (
+                    <div>
+                        
+                        <TaskList markTasks={markTasks} setMarkTasks={setMarkTasks} handelCheck={handelCheck}/>
+                        <ProgressTask markTasks={markTasks} progressTask={progressTask}/>
+                    </div>
+               )
+           } 
+
+           function TaskList(props){
+               const {markTasks,setMarkTasks,handelCheck}=props 
+               return (
+                    <div>
+                        <h2>List Tasks-{markTasks.length}</h2>
+                        <ul>{markTasks.map((task)=>{
+                            return (
+                                <li key={task.id}>
+                                <input type="checkbox" checked={task.completed} 
+                                onChange={(e)=>{
+                                    handelCheck(e,task.id)
+                                }}/>
+                               {task.completed===true ? <strike>{task.title}</strike>:<span>{task.title}</span>}
+                                 </li>
+                            )
+                        })}
+                        </ul>
+                    </div>
+               )
+           }
+
+           function ProgressTask(props){
+               const {markTasks,progressTask}=props
+              const maxi=markTasks.length
+              let val=progressTask.length
+               return (
+                <progress max={maxi} value={val}></progress>    
+               )
+           }
+
+           function App(props){
+               return (
+                   <div>
+                    <TaskContainer />
+                    </div>
+               )
+           }
+           ReactDOM.render(<App />,rootHandle)
+        </script>
+    </body>
+</html>

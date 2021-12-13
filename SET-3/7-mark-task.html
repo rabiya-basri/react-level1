@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            mark as completed
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           const {useState}=React 
+
+            function MarkTask(props){
+                const [markTasks,setMarkTasks]=useState([
+                   {id:1,title:'get the website live',completed:true},
+                   {id:2,title:'work on user validation',completed:false},
+                   {id:3,title:'Automate the deployment process',completed:false}
+               ])
+              
+               const handelCheck=(e,id)=>{
+               const checkTask=e.target.checked
+                const result=markTasks.map((task)=>{
+                    if(task.id===id){
+                        task.completed=checkTask
+                        return task
+                    }else{
+                        return task
+                    }
+                })
+               setMarkTasks(result)
+              }
+                return (
+                    <div>
+                        <h2>List Task-{markTasks.length}</h2>
+                        <ul>{markTasks.map((task)=>{
+                            return (
+                                <li key={task.id}>
+                                <input type="checkbox" checked={task.completed} 
+                                    onChange={(e)=>{
+                                    handelCheck(e,task.id)
+                                }}/>
+                                {task.completed===true ? <strike>{task.title}</strike> : <span>{task.title}</span>} 
+                                 </li>
+                            )
+                        })}
+                        </ul>
+                    </div>
+                )
+            }
+           
+           ReactDOM.render(<MarkTask />,rootHandle)
+        </script>
+    </body>
+</html>

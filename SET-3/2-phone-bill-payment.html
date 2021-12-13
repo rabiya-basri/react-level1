@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+           2-phone bill payment 
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           
+           const {useState}=React 
+
+           function BillPayment(props){
+           const [serviceType,setServices]=useState('vodafone')
+
+           const handelService=(e)=>{
+            setServices(e.target.value)
+           }
+
+            return (
+                <form>
+                    <h2>Pay bill for {serviceType}</h2><hr/>
+                    <input type="radio" name='serviceType' 
+                    value='vodafone' checked={serviceType=='vodafone'} 
+                    onChange={handelService}/>vodafone <br/>
+
+                    <input type="radio" 
+                    name='serviceType' value='airtel' 
+                    checked={serviceType=='airtel'} 
+                    onChange={handelService}/>airtel <br/>
+
+                    <input type="radio" name='serviceType' 
+                    value='jio' checked={serviceType=='jio'} 
+                    onChange={handelService}/>jio <br/>
+
+                    <input type="text" placeholder={`Enter your ${serviceType} Number`}/>
+                </form>
+            )
+           }
+           ReactDOM.render(<BillPayment />,rootHandle) 
+           
+        </script>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Miles converter
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           
+           const {useState}=React 
+
+            function MilesConverter(props){
+                const [miles,setMiles]=useState(0)
+
+                let kilometer=(miles*1.6).toFixed(2)
+
+                const handelMiles=(e)=>{
+                   setMiles(e.target.value)
+                }
+                return (
+                    <form>
+                        <h1>Distance calculator</h1><hr/>
+                        <h3>kms - {kilometer}</h3>
+                        <h3>Miles - {miles}</h3>
+                        <input type="range" value={miles} onChange={handelMiles}/>
+                    </form>
+                )
+            }
+           ReactDOM.render(<MilesConverter />,rootHandle)
+        </script>
+    </body>
+</html>

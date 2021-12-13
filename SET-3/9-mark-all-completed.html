@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            mark- all component
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           
+           const {useState}=React 
+           function MarkAllComplete(props){
+               const [tasks,setTasks]=useState([
+                   {id:1,name:'hello',completed:false},
+                   {id:2,name:'hello world',completed:false},
+                   {id:3,name:'hello rabiya',completed:false},
+                   {id:4,name:'hello everyone',completed:false}
+               ])
+               const [check,setCheck]=useState(false)
+               const handelChange=(e)=>{
+                    setCheck(e.target.checked)
+               }
+               return (
+                        <div>
+                            <h1>Mark All As Completed</h1>
+                            <table border='1'>
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" checked={check} onChange={handelChange}/></th>
+                                        <th>name</th>
+                                        <th>status</th>
+                                    </tr>  
+                                </thead>
+                                <tbody>
+                                    {tasks.map((task)=>{
+                                        return (
+                                            <tr key={task.id}>
+                                                <td><input type="checkbox" checked={check} onChange={handelChange} disabled={check}/></td>
+                                                <td>{task.name}</td>
+                                                <td>{check ? 'completed' : 'pending'}</td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+               )
+           }
+          ReactDOM.render(<MarkAllComplete />,rootHandle) 
+        </script>
+    </body>
+</html>

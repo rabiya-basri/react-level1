@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Employee listing 
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           const {useState}=React 
+           function EmployeeTable(props){
+               const {employees,setEmployees,handelCheck}=props 
+            return (
+                <div>
+                    <h1>Listing Employees-{employees.length}</h1>
+                   <table border='1'>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {employees.map((employee)=>{
+                            return (
+                                <tr key={employee.id}>
+                                    <td>{employee.id}</td>
+                                    <td>{employee.name}</td>
+                                    <td><input type="checkbox"
+                                        checked={employee.selected}
+                                        onChange={(e)=>{
+                                            handelCheck(e,employee.id)
+                                        }} /></td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                    </table>
+                </div>
+            )
+           }
+            function App(props){
+                const [employees,setEmployees]=useState([
+                    { id: 1, name: 'emp11', email: 'emp11@gmail.com', selected: false },
+                    { id: 2, name: 'emp12', email: 'emp12@gmail.com', selected: false },
+                    { id: 3, name: 'emp13', email: 'emp13@gmail.com', selected: false },
+                    { id: 4, name: 'emp14', email: 'emp14@gmail.com', selected: false }
+                ])
+                const handelCheck=(e,id)=>{
+                const nameInput=e.target.checked
+                const result =  employees.map((employee)=>{
+                        if(employee.id===id){
+                          employee.selected=nameInput
+                            return employee
+                        }else{
+                         return employee
+                        }
+                        
+                    })
+                   setEmployees(result)
+                 
+                }
+                return (
+                <div>
+                    <EmployeeTable employees={employees} 
+                            setEmployees={setEmployees} 
+                            handelCheck={handelCheck}/>
+                    <h2>Selected Employees</h2>
+                    <ul>
+                        {employees.map((emp)=>{
+                            return (emp.selected && <li key={emp.id}>{emp.name}</li>)
+                        })}
+                        </ul>
+                    </div>
+                )
+            }
+          ReactDOM.render(<App />,rootHandle) 
+        </script>
+    </body>
+</html>

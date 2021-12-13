@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            neighnouring countries 
+        </title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <script type="text/babel">
+           const rootHandle = document.getElementById('root')
+           const {useState,useEffect}=React 
+           const url='https://restcountries.eu/rest/v2/all'
+
+           function App(props){
+               const [countries,setCountries]=useState([])//countries
+
+               useEffect(()=>{
+                    axios.get(url)
+                        .then((response)=>{
+                            console.log(response.data)
+                            setCountries(response.data)
+                        })
+               },[])
+
+               const handelCountrySelect=(countries)=>{
+                   setCountries(countries)
+               }
+               return (
+                   <div>
+                    <CountriesSelect countries={countries} handelCountrySelect={handelCountrySelect} />
+                  
+                    </div>
+               )
+           } 
+           function CountriesSelect(props){
+              const {countries,handelCountrySelect}=props
+              const [countryCode,setCountryCode]=useState('')//dropdown
+              const [borders,setBorders]=useState([])//collicting borders
+              const [countryBorder,setCountryBorder]=useState([])//fetching country border
+
+              const handelCountry=(e)=>{
+                const code=e.target.value
+
+                
+                setCountryCode(code)
+                countries.forEach((country)=>{
+                   if(country.alpha3Code===code) {
+                      setBorders(country.borders)
+                   }
+
+                })
+                
+                let borderResult=[]
+                countries.forEach((border)=>{
+                    if(borders.includes(border.alpha3Code)){   
+                       borderResult.push(border)      
+                    }
+                    setCountryBorder(borderResult) 
+                })
+                console.log(borderResult)
+                //console.log(countryBorder)
+              }
+               return (
+                    <form>
+                        <select value={countryCode} onChange={handelCountry} >
+                            <option value="">Select</option>
+                            {countries.map((country,i)=>{
+                                return (
+                                    <option value={country.alpha3Code} key={i}>{country.name}</option>
+                                )
+                            })}
+                        </select>
+                        
+                        <table border='1'>
+                            <thead>
+                                <tr>
+                                    <td>flag</td>
+                                    <td>Name</td>
+                                    <td>Capital</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {countryBorder && countryBorder.map((country,i)=>{
+                                    return (
+                                        <tr key={i}>
+                                            <td><img style={{width:'30px',height:'30px'}} src={country.flag} alt={country.name}/></td>
+                                            <td>{country.name}</td>
+                                            <td>{country.capital}</td>
+                                         </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </table>
+                    </form>
+               )
+            }
+           ReactDOM.render(<App />,rootHandle)
+        </script>
+    </body>
+</html>
